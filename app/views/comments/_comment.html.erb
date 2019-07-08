@@ -4,8 +4,10 @@
   <%= comment.body %>
 </p>
 
-<p>
-    <%= link_to 'Supprimer le commentaire', [comment.article, comment],
-                method: :delete,
-                data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce commentaire?' } %>
-</p>
+<% if user_signed_in? %>
+  <p>
+      <%= link_to 'Supprimer le commentaire', [comment.article, comment],
+                  method: :delete,
+                  data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce commentaire?' } %>
+  </p>
+<% end %>

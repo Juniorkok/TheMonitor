@@ -1,6 +1,17 @@
 <h1>Listing</h1>
 
-<%= link_to 'Créer un nouvel article', new_article_path %>
+<% if user_signed_in? %>
+    <p>Bienvenue contributeur !</p><br>
+    <%= link_to 'Créer un nouvel article', new_article_path %>
+    <%= link_to "Log out", destroy_user_session_path,
+        method: :delete,
+        data: { confirm: "Êtes-vous sûr de vouloir vous déconnecter?" } 
+    %>
+<% end %>
+
+<% if !user_signed_in? %>
+    <%= link_to 'Se connecter', new_user_session_url %>
+<% end %>
 
 <table>
     <th>Titre</th>
@@ -12,10 +23,14 @@
             <td><%= article.title %></td>
             <td><%= article.content %></td>
             <td><%= link_to 'Voir', article_path(article) %></td>
-            <td><%= link_to 'Modifier', edit_article_path(article) %></td>
-            <td><%= link_to 'Supprimer', article_path(article),
-                    method: :delete,
-                    data: { confirm: "Voulez-vous supprimer cet article?" } %></td>
+            <% if user_signed_in? %>
+                <td><%= link_to 'Modifier', edit_article_path(article) %></td>
+                <td><%= link_to 'Supprimer', article_path(article),
+                        method: :delete,
+                        data: { confirm: "Voulez-vous supprimer cet article?" } 
+                    %>
+                </td>
+            <% end %>
         </tr>
     <% end %>
 </table>
