@@ -63,6 +63,18 @@
   </div>
 </nav>
 
+<% if user_signed_in? %>
+    <p>Bienvenue contributeur !</p><br>
+    <%= link_to "Log out", destroy_user_session_path,
+        method: :delete,
+        data: { confirm: "Êtes-vous sûr de vouloir vous déconnecter?" } 
+    %>
+<% end %>
+
+<% if !user_signed_in? %>
+    <%= link_to 'Se connecter', new_user_session_url %>
+<% end %>
+
 <!-- Page Content -->
 <div class="container">
 
