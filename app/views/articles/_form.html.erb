@@ -20,6 +20,8 @@
     <%= form.label :content %><br>
     <%= form.text_area :content %>
   </p>
+
+  <%= form.select :category_id, options_for_select(Category.all.map{|cat|[cat.name,cat.id]})  %>
  
   <p>
     <%= form.submit %>

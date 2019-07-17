@@ -1,10 +1,28 @@
 class ArticlesController < ApplicationController
-    http_basic_authenticate_with name: "juju", password:"abc123", except: [:index, :show]
+    /http_basic_authenticate_with name: "juju", password:"abc123", except: [:index, :show]/
+
+    /def index
+        @articles = Article.all
+    end/
 
     def index
-        @articles = Article.all
+        if params[:search]
+          @articles = Article.search(params[:search])
+        elsif params[:category]
+          @articles = Article.searchByCategory(params[:category])
+        else
+          @articles = Article.all
+        end
     end
     
+    def index_admin
+        if params[:search]
+          @articles = Article.search(params[:search])
+        else
+          @articles = Article.all
+        end
+    end
+
     def show
         @article = Article.find(params[:id])
     end
@@ -18,8 +36,9 @@ class ArticlesController < ApplicationController
     end
     
     def create
+        p article_params
         @article = Article.new(article_params)
-
+        
         if @article.save
             redirect_to @article
         else
@@ -46,7 +65,7 @@ class ArticlesController < ApplicationController
 
     private
         def article_params
-            params.require(:article).permit(:title, :text)
+            params.require(:article).permit(:title, :content, :category_id)
         end
     
 end

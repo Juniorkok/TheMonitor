@@ -1,0 +1,23 @@
+<h1>Listing</h1>
+
+
+
+<%= link_to 'Créer un nouvel article', new_article_path %>
+
+<table>
+    <th>Titre</th>
+    <th>Contexte</th>
+    <th colspan="3"></th>
+
+    <% @articles.each do |article|%>
+        <tr>
+            <td><%= article.title %></td>
+            <td><%= article.content %></td>
+            <td><%= link_to 'Voir', article_path(article) %></td>
+            <td><%= link_to 'Modifier', edit_article_path(article) %></td>
+            <td><%= link_to 'Supprimer', article_path(article),
+                    method: :delete,
+                    data: { confirm: "Voulez-vous supprimer cet article?" } %></td>
+        </tr>
+    <% end %>
+</table>
