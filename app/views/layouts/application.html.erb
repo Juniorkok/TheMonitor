@@ -58,22 +58,22 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
+        <li class="nav-item">
+        <% if user_signed_in? %>
+          <%= link_to "Log out", destroy_user_session_path, :class => "nav-link",
+              method: :delete,
+              data: { confirm: "Êtes-vous sûr de vouloir vous déconnecter?" } 
+          %>
+        <% else %>
+            <%= link_to 'Se connecter', new_user_session_url, :class => "nav-link" %>
+        <% end %>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<% if user_signed_in? %>
-    <p>Bienvenue contributeur !</p><br>
-    <%= link_to "Log out", destroy_user_session_path,
-        method: :delete,
-        data: { confirm: "Êtes-vous sûr de vouloir vous déconnecter?" } 
-    %>
-<% end %>
 
-<% if !user_signed_in? %>
-    <%= link_to 'Se connecter', new_user_session_url %>
-<% end %>
 
 <!-- Page Content -->
 <div class="container">
