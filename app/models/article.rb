@@ -9,7 +9,7 @@ class Article < ApplicationRecord
     where("title LIKE ?", "%#{search}%")
     end
 
-    def self.searchByCategory(search)
-    where("category LIKE ?", "%#{search}%")
+    def self.searchByCategory(category)
+    where("category_id LIKE ?", "%#{category}%")
     end
 end
