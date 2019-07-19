@@ -36,7 +36,6 @@ class ArticlesController < ApplicationController
     end
     
     def create
-        p article_params
         @article = Article.new(article_params)
         
         if @article.save
@@ -65,7 +64,7 @@ class ArticlesController < ApplicationController
 
     private
         def article_params
-            params.require(:article).permit(:title, :content, :category_id)
+            params.require(:article).permit(:title, :content, :category_id , :image_url)
         end
     
 end
