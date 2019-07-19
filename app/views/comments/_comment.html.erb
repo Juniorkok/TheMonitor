@@ -1,11 +1,18 @@
+<% if !@article.comments.empty? %>
 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
+<div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body">
+            <h5 class="mt-0">User</h5>
+            <%= comment.body %>
+          </div>
+</div>  
 
 <p>
     <%= link_to 'Supprimer le commentaire', [comment.article, comment],
                 method: :delete,
                 data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce commentaire?' } %>
 </p>
+
+
+<%end%>

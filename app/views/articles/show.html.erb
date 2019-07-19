@@ -17,11 +17,14 @@
 =end%>
 
       <div class="card mb-4" style="margin-top:30px">
-        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+        <img class="card-img-top" src="<%= @article.image_url.presence ||  'https://i.giphy.com/media/xTka034bGJ8H7wH1io/giphy.webp'%>"  
+           alt="Card image cap">
         <div class="card-body">
           <h2 class="card-title"><%= @article.title %></h2>
           <p class="card-text"><%= @article.content %></p>
-          <a href="#" class="btn btn-primary">Read More &rarr;</a>
+          <span class="badge badge-success"><%= Category.find(@article.category_id).name %></span>
+          <br>
+          <%= link_to 'Voir →', article_path(@article), { :class=>"btn btn-primary" } %>
         </div>
         <div class="card-footer text-muted">
           Posté le <%= @article.created_at.strftime('%d-%m-%Y') %> by
@@ -32,11 +35,13 @@
 
 
 
-<h2>Comments</h2>
-<%= render @article.comments %>
+<h2>Comments :</h2>
+
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
+
+<%= render @article.comments %>
 
 <%= link_to 'Retour', articles_path %> |
 <%= link_to 'Modifier', edit_article_path(@article) %> |
