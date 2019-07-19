@@ -8,7 +8,8 @@
 <% @articles.each do |article|%>
 
       <div class="card mb-4" style="margin-top:30px">
-        <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+        <img class="card-img-top" src="<%= article.image_url.presence ||  'http://placehold.it/750x300'%>"  
+           alt="Card image cap">
         <div class="card-body">
           <h2 class="card-title"><%= article.title %></h2>
           <p class="card-text"><%= article.content %></p>
